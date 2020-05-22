@@ -70,13 +70,13 @@
                 <tr>
                     <td rowspan="2" ><span v-text="index+1"></span></td>
                     <td rowspan="2"><span v-text="place.name"></span></td>
-                    <td><img src="../img/tianam.jpg" class="viewspotimg"></td>
+                    <td><img :src="'data:image/png;base64,'+place.picPath" class="viewspotimg"></td>
                     <td><span v-text="place.hotTime"></span></td>
                     <td><span v-text="place.hotTicket"></span></td>
                     <td><span v-text="place.dimTicket"></span></td>
                     <td style="text-align: center">
-                        <a href="#">删除景点</a><br>
-                        <a href="updateviewspot.html">修改景点</a>
+                        <a href="javascript:;" @click="deleteOnePlace(place.id)">删除景点</a><br>
+                        <a :href="'updateviewspot.html?id='+place.id">修改景点</a>
                     </td>
                 </tr>
                 <tr>
@@ -88,7 +88,7 @@
                 </tr>
             </tbody>
         </table>
-        <a href="addviewspot.html"><button type="button">添加景点</button></a>&emsp;
+        <a :href="'addviewspot.html?id='+id"><button type="button">添加景点</button></a>&emsp;
         <a href="../province/provincelist.html">返回省份列表</a>
         <div id="pages">
             <a href="javascript:;" v-if="page>1" class="page" @click="findAllPage(page-1)">&lt;上一页</a>
@@ -130,6 +130,20 @@
                     _this.totalPage = res.data.totalPage;
                     _this.page = res.data.page;
                 });
+            },
+            deleteOnePlace(id){
+                _this = this;
+                if(confirm("确定要删除景点吗?")){
+                    axios.get("http://127.0.0.1:8989/place/delete?id="+id).then((res)=>{
+                        console.log(res.data)
+                        if(res.data.state){
+                            alert(res.data.msg+" 请点击确定");
+                            location.reload();
+                        }else {
+                            alert(res.data.msg);
+                        }
+                    });
+                }
             }
         },
         created(){

@@ -35,4 +35,9 @@
         update t_province set name=#{name},tags=#{tags},placecounts=#{placecounts} where id=#{id}
     </update>
 
+    <!--获取所有省份信息-->
+    <select id="findAllProvince" resultType="Province">
+        select id,name,tags,placecounts from t_province
+    </select>
+
 </mapper>

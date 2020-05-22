@@ -24,4 +24,7 @@ public interface ProvinceService {
 //    修改省份信息
     void update(Province province);
 
+//    获取所有省份
+    List<Province> findAllProvince();
+
 }

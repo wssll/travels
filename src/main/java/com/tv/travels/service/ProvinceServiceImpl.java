@@ -75,4 +75,13 @@ public class ProvinceServiceImpl implements ProvinceService {
     public void update(Province province) {
         provinceDAO.update(province);
     }
+
+    /**
+     * 获取所有省份信息
+     * @return
+     */
+    @Override
+    public List<Province> findAllProvince() {
+        return provinceDAO.findAllProvince();
+    }
 }

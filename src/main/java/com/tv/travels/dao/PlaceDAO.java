@@ -13,4 +13,5 @@ public interface PlaceDAO extends BaseDAO<Place,String> {
 
     Integer findByProvinceIdCounts(String provinceId);
 
+
 }

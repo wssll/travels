@@ -111,4 +111,13 @@ public class ProvinceController {
         return result;
     }
 
+    @GetMapping("findAll")
+    public Map<String,Object> findAll(){
+        List<Province> allProvince = provinceService.findAllProvince();
+        Map<String,Object> map = new HashMap<>();
+        map.put("provinces",allProvince);
+        map.put("count",allProvince.size());
+        return map;
+    }
+
 }

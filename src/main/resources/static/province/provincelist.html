@@ -116,14 +116,16 @@
                 });
             },
             deleteProvince(id){
-                axios.get("http://127.0.0.1:8989/province/delete?id="+id).then((res)=>{
-                    if(res.data.state){
-                        alert(res.data.msg+"点击确定");
-                        location.reload(true);//刷新当前页
-                    }else {
-                        alert(res.data.msg);
-                    }
-                });
+                if(confirm("确定要删除改省份吗?")){
+                    axios.get("http://127.0.0.1:8989/province/delete?id="+id).then((res)=>{
+                        if(res.data.state){
+                            alert(res.data.msg+"点击确定");
+                            location.reload(true);//刷新当前页
+                        }else {
+                            alert(res.data.msg);
+                        }
+                    });
+                }
             }
         },
         created(){
