@@ -89,6 +89,10 @@
             }
         },
         created(){
+            let userId = localStorage.getItem("userId");
+            if(userId==null){
+                location.href="../login.html"
+            }
             this.id = location.href.substring(location.href.indexOf("=")+1);
             this.findOneProvince(this.id);
         }

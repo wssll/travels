@@ -47,7 +47,7 @@
     <div id="header">
         <div style="float: right;padding-top: 24px">
             2020/05&emsp;
-            <a href="../login.html" style="color:#fff;float: right">安全退出</a>
+            <a href="../login.html" style="color:#fff;float: right" @click="logout">安全退出</a>
         </div>
         <h1>旅游信息管理系统</h1>
     </div>
@@ -144,9 +144,17 @@
                         }
                     });
                 }
+            },
+            logout(){
+                localStorage.removeItem("userId");
+                location.href="../login.html";
             }
         },
         created(){
+            let userId = localStorage.getItem("userId");
+            if(userId==null){
+                location.href="../login.html"
+            }
             let id = location.href.substring(location.href.indexOf("=")+1);
             this.id = id;
             this.findAllPage()

@@ -83,6 +83,12 @@
                     }
                 });
             }
+        },
+        created(){
+            let userId = localStorage.getItem("userId");
+            if(userId==null){
+                location.href="../login.html"
+            }
         }
     });
 </script>

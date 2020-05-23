@@ -39,8 +39,9 @@
     <div id="wrap">
         <div id="header">
             <div style="float: right;padding-top: 24px">
-                2020/05&emsp;
-                <a href="../login.html" style="color:#fff;float: right">安全退出</a>
+                <span v-text="time"></span>
+                <span></span>
+                <a href="../login.html" style="color:#fff;float: right" @click="logout">安全退出</a>
             </div>
             <h1>旅游信息管理系统</h1>
         </div>
@@ -100,6 +101,7 @@
             rows: 4,
             totalPage: 0,
             totals: 0,
+            time:""
         },
         methods:{
             findAll(indexpage) {//查询所有
@@ -126,9 +128,31 @@
                         }
                     });
                 }
-            }
+            },
+            logout(){
+                localStorage.removeItem("userId");
+                location.href="../login.html";
+            },
+            getTime(){
+                var _this = this;
+                let yy = new Date().getFullYear();
+                let mm = new Date().getMonth()+1;
+                let dd = new Date().getDate();
+                let hh = new Date().getHours();
+                let mf = new Date().getMinutes()<10 ? '0'+new Date().getMinutes() : new Date().getMinutes();
+                let ss = new Date().getSeconds()<10 ? '0'+new Date().getSeconds() : new Date().getSeconds();
+                this.time = yy+'-'+mm+'-'+dd+' '+hh+':'+mf+':'+ss;
+            },
+            currentTime(){
+                setInterval(this.getTime,500)
+            },
         },
         created(){
+            this.currentTime();
+            let userId = localStorage.getItem("userId");
+            if(userId==null){
+                location.href="../login.html"
+            }
             this.findAll();
         }
     })

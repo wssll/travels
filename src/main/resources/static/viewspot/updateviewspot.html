@@ -176,6 +176,10 @@
             }
         },
         created(){
+            let userId = localStorage.getItem("userId");
+            if(userId==null){
+                location.href="../login.html"
+            }
             let id = location.href.substring(location.href.indexOf("=")+1);
             this.id = id;
             _this = this;
